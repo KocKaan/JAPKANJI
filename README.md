@@ -1,4 +1,4 @@
-JAPNKANJI
+#JAPNKANJI#
 
 
 The client and advisor Amaha Ayaka is currently teaching introduction level Japanese in the Japanese Culture Foundation. She explained to me that the students in her class are having problem memorizing the kanji words, which is more complex alphabet than normal 26 letter Hiragana. She told me that when she teaches them the kanji letters student don’t have problem understanding the meaning but after one day they forget the letter or stroke order. She told me that this occurs because the student are young thus does not study at home. She asked for a computer game that challenges students ability to memorize kanji’s.
@@ -17,19 +17,21 @@ As the user of this educational software will be young students I suggested crea
 6. Teacher could create as many level as he/she wants.
 
 
-##Technologies That Has Been Utilized
-1	Netbeans 11.1	Used for developer IDE
-2	Java 8 JDK	Needed JDK for GlassFish 5.1.0 	
-3	Java 12 JDK	For developing the app
-4	Apache Derby Database	Database Server for web Application (storing data)
-5	GlassFish Server 5.1.0	Web Server for publishing web application
-6	JavaServer Faces (JSF) 2.3
+##Technologies That Has Been Utilized##
+
+1	Netbeans 11.1	Used for developer IDE_
+2	Java 8 JDK	Needed JDK for GlassFish 5.1.0_ 	
+3	Java 12 JDK	For developing the app_
+4	Apache Derby Database	Database Server for web Application (storing data)_
+5	GlassFish Server 5.1.0	Web Server for publishing web application_
+6	JavaServer Faces (JSF) 2.3_
 	UI library for Java Server Faces	Free and rich UI components for Java Server faces.
 7	Java Persistence API (JPA) 2.0	Entity classes from the database, and manage transactions. 	(the default persistence provider for the GlassFish server.)
 8	PrimeFaces 	UI Components
 9	Enterprise JavaBeans (EJB) 3.1	stateless EJBs with the entity classes and the business logic for the application
 
-##Database Architecture
+##Database Architecture##
+
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/75183908/112087837-17ab6b80-8b65-11eb-9ec9-28641a46cf9d.png">
 
 No	Database Table	Description	Relations
@@ -38,10 +40,47 @@ No	Database Table	Description	Relations
 3	Results:	Results on user id, question id, Level ID points for that level, answers to the questions and the outcome of the answered questions will be stored. 	
 4	Users:	Users first name, Surname, user Name, password and user type (teacher or student) is stored. 	
 
-##Web Application
+##Web Application##
 
 While developing the program two wizard has been used.
 -	The first wizard is “Entity Classes from Database wizard” With this entity classes has been created.
 -	The second wizard is “JSF Pages from Entity Classes wizard”, default web pages has been created.
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/75183908/112088061-7a046c00-8b65-11eb-817d-a1fd1d22b1ec.png">
+
+##Graphical User Interface - Admin Level##
+Below there are the HTLM codes for Levels page’s list page. The data and the colons for the Database web component are structuralized like in the example. The graphical side of the program is fairly basic and it meets the need of the client which is stated as basic and user friendly. In addition to that as I expect lots of students will use this program, I added basic sorting algorithms to sort the data that has been created by students. For example it is expected that abundant amount different users will play the first level of JapKanji therefore there will be lots of different points accumulated by different users. At this point by utilizing user friendly sorting boxes the user could select his/her own ID to find his her own result. Furthermore if there are overwhelming data created by that user(by playing multiple levels), the user could double sort: selecting his/her own id and the level that he/ she wants to see.
+
+**JSF page: admin user Html Codes**
+The Graphical User Interface html codes are obtained by prime face as a template. However as shown below these templated are modified and manipulated to be able to use and integrate to our backend java codes.
+
+<img width="451" alt="image" src="https://user-images.githubusercontent.com/75183908/112089032-4296bf00-8b67-11eb-80a6-2cc2fa12c32d.png">
+
+JSF page: Admin main menu
+<img width="158" alt="image" src="https://user-images.githubusercontent.com/75183908/112089062-4e828100-8b67-11eb-9c5a-6ab6cec32b9c.png">
+
+
+<img width="451" alt="image" src="https://user-images.githubusercontent.com/75183908/112089094-5e01ca00-8b67-11eb-915f-dae9c15c1b8a.png">
+
+**Recording Test Results**
+In order to record the answers that the students gave I created the TestResults class. In this class there are methods that save the results to the database. In order to restrict the amount of data that could be added to the database I restricted the insertion of redundant data. This is accomplished by deleting the old result when the level is played again. For example if one of Miss Ayaka’s student decides to play the level 1 again the old result is deleted and the new data is written on the database. In addition to that there is a distinction created for true and false answers.  As the program test whether the chosen answer is correct or false by if statement, the result is saved to SaveNewResult() according to whether it is true or false. At the diagrams those methods are revealed.
+
+<img width="451" alt="image" src="https://user-images.githubusercontent.com/75183908/112089233-9e614800-8b67-11eb-98a8-f4d9ad003dc6.png">
+
+At the end of SaveResult function there is CreateEditResult() function which is used record to database.
+
+<img width="451" alt="image" src="https://user-images.githubusercontent.com/75183908/112089262-ad47fa80-8b67-11eb-8399-edf20af3559c.png">
+
+This function is used for recording new results. The if statement is used because we want to distinguish between correct and false answer
+
+<img width="451" alt="image" src="https://user-images.githubusercontent.com/75183908/112089312-c650ab80-8b67-11eb-8a9a-6fea3bc560b0.png">
+DeleteOldResults function is responsible for deleting the old results.
+
+##Rereferences##
+1.	Generating a JavaServer Faces 2.x CRUD Application from a Database :[Netbeans Documentation](https://netbeans.org/kb/docs/web/jsf20-crud.html)
+2.	Netbeans Primefaces CRUD Generator Tutorial : [CRUD Tutorial](https://www.youtube.com/watch?v=kGHx3zttUQA)
+3.	Working with the Java DB (Derby) Database:[Java Database](https://netbeans.org/kb/docs/ide/java-db.html)
+4.	Installing and starting GlassFish server :[GlassFish Server](http://doraprojects.net/blog/?p=1521)
+5.	JDK 12: [JDK12 documentation](https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html)
+6.	JDK 8:[JDK8 documentation](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+7.	NetBeans IDE:[NetBeans IDE](https://netbeans.apache.org/download/index.html) 
