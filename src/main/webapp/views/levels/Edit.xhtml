@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LevelsEditDlg" widgetVar="LevelsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLevelsTitle}">
+            <h:form id="LevelsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{levelsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLevelsLabel_levelname}" for="levelname" />
+                        <p:inputText id="levelname" value="#{levelsController.selected.levelname}" title="#{bundle.EditLevelsTitle_levelname}" required="true" requiredMessage="#{bundle.EditLevelsRequiredMessage_levelname}"/>
+                        <p:outputLabel value="#{bundle.EditLevelsLabel_leveltime}" for="leveltime" />
+                        <p:inputText id="leveltime" value="#{levelsController.selected.leveltime}" title="#{bundle.EditLevelsTitle_leveltime}" required="true" requiredMessage="#{bundle.EditLevelsRequiredMessage_leveltime}"/>
+                        <p:outputLabel value="#{bundle.EditLevelsLabel_levelorder}" for="levelorder" />
+                        <p:inputText id="levelorder" value="#{levelsController.selected.levelorder}" title="#{bundle.EditLevelsTitle_levelorder}" required="true" requiredMessage="#{bundle.EditLevelsRequiredMessage_levelorder}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{levelsController.update}" value="#{bundle.Save}" update="display,:LevelsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LevelsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LevelsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

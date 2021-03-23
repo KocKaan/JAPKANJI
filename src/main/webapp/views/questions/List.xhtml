@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListQuestionsTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="QuestionsListForm">
+                <p:panel header="#{bundle.ListQuestionsTitle}">
+                    <p:dataTable id="datalist" value="#{questionsController.items}" var="item"
+                                 selectionMode="single" selection="#{questionsController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 expandableRowGroups="true"
+                                 sortBy="#{item.levelid.levelname}"
+                                 >
+
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:headerRow>
+                            <p:column colspan="2">
+                                <h:outputText value="#{item.levelid.levelname}" />
+                            </p:column>
+                        </p:headerRow>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionsTitle_questiontext}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.questiontext}"/>
+                        </p:column>
+                        
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionsTitle_questioimage}"/>
+                            </f:facet>
+                            <img src="data:image/png;base64,#{item.questioimage}" width="100" height="100" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionsTitle_questionanswer}"/>
+                            </f:facet>
+                            <p:panel id="panel1" visible="#{item.questiontype}" toggleable="true" >
+                                <p:selectOneRadio id="console" value="#{item.questionanswer}" unselectable="true" disabled="true"  >
+                                    <f:selectItem itemLabel="#{item.questionanswera}" itemValue="A" />
+                                    <f:selectItem itemLabel="#{item.questionanswerb}" itemValue="B" />
+                                    <f:selectItem itemLabel="#{item.questionanswerc}" itemValue="C" />
+                                    <f:selectItem itemLabel="#{item.questionanswerd}" itemValue="D" />
+                                </p:selectOneRadio>
+                            </p:panel>
+                            <p:panel id="panel2" visible="#{!item.questiontype}" toggleable="true">
+                                <p:inputText value="#{item.questionanswer}" style="width:100%" label="Answer" readonly="true"  disabled="true"/>
+                            </p:panel>
+                        </p:column>
+   
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionsTitle_questionpoint}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.questionpoint}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{questionsController.prepareCreate}" update=":QuestionsCreateForm" oncomplete="PF('QuestionsCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":QuestionsViewForm" oncomplete="PF('QuestionsViewDialog').show()" disabled="#{empty questionsController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":QuestionsEditForm" oncomplete="PF('QuestionsEditDialog').show()" disabled="#{empty questionsController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{questionsController.destroy}" update=":growl,datalist" disabled="#{empty questionsController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

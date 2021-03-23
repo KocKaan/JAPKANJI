@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsersCreateDlg" widgetVar="UsersCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsersTitle}">
+            <h:form id="UsersCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usersController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_firstname}" for="firstname" />
+                        <p:inputText id="firstname" value="#{usersController.selected.firstname}" title="#{bundle.CreateUsersTitle_firstname}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_firstname}"/>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_surname}" for="surname" />
+                        <p:inputText id="surname" value="#{usersController.selected.surname}" title="#{bundle.CreateUsersTitle_surname}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_surname}"/>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{usersController.selected.username}" title="#{bundle.CreateUsersTitle_username}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_username}"/>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.CreateUsersTitle_password}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_password}"/>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_usertype}" for="usertype" />
+                        <p:selectBooleanCheckbox id="usertype" value="#{usersController.selected.usertype}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_usertype}" itemLabel="Admin"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usersController.create}" value="#{bundle.Save}" update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsersCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsersCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

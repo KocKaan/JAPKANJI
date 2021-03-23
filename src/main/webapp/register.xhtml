@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="registerForm">
+            <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+            
+            <table>
+                <tr>
+                    <td><h:outputText value="Enter Your First Name:" /></td>
+                    <td><h:inputText id="fname" value="#{authView.firstname}"
+                            required="true" requiredMessage="Please enter your first name" /></td>
+                    <td><h:message for="fname" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter Your Last Name:" /></td>
+                    <td><h:inputText id="lname" value="#{authView.surname}"
+                            required="true" requiredMessage="Please enter your last name" /></td>
+                    <td><h:message for="lname" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter Your User Name:" /></td>
+                    <td><h:inputText id="username" value="#{authView.username}"
+                            required="true" requiredMessage="Please enter your username" /></td>
+                    <td><h:message for="username" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Enter Password :" /></td>
+                    <td><h:inputSecret id="psw" value="#{authView.password}"
+                            required="true" requiredMessage="Please enter your password" /></td>
+                    <td><h:message for="psw" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td />
+                    <td><h:commandButton value="Register" action="#{authView.add}" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputLink value="home.xhtml">Home</h:outputLink></td>
+                </tr>
+            </table>
+        </h:form>
+    </h:body>
+</html>
+

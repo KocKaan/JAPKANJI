@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templatestudent.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLevelsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+
+            
+            <h:form id="LevelsListForm">
+                <p:panel header="#{bundle.ListLevelsTitle}">
+                    <p:dataTable id="datalist" value="#{levelsController.items}" var="item"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLevelsTitle_levelname}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.levelname}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLevelsTitle_leveltime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.leveltime}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLevelsTitle_levelorder}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.levelorder}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Test Point"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalresult}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Student Point"/>
+                            </f:facet>
+                            <h:outputText value="#{item.testresult}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
