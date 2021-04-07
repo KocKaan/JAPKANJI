@@ -46,7 +46,7 @@ As the user of this educational software will be young students I suggested crea
 
 <img width="452" alt="image" src="https://user-images.githubusercontent.com/75183908/112087837-17ab6b80-8b65-11eb-9ec9-28641a46cf9d.png">
 
-   	Database Table	Description	Relations
+   	Database Table	   Description	Relations
 
 1.	Levels:	The program's question level informations are stored. Level name, Level time and Level order is stored. 	-
 2.	Questions:	Information on question is stored. The table consists of level id, question image and text, question types and question point. 	It has a foreign key relations to Levels table.
